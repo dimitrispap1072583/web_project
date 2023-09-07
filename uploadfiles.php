@@ -59,7 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
   	if ($_FILES['my_upload']['size'] > 1000000) 
   	{
 		echo " too big file ";
-  		exit;        
+  		exit; 
+        }
+        
     }
 
     //Save the file
@@ -68,24 +70,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
     	echo 'File Has Been Uploaded !';
     }
-  }
-}
-
-	if(isset($upload_file_name)) {
-  $connect = mysqli_connect("localhost:3307","root","","web_project");
+    if(isset($upload_file_name)) {
+           $connect = mysqli_connect("localhost:3307","root","","web_project");
 
   
 
-  $data = file_get_contents($dest);
+           $data = file_get_contents($dest);
 
-  $array = json_decode($data, true);
+           $array = json_decode($data, true);
 
-  foreach($array as $row){
-    $sql = " INSERT INTO product(product_id,product_name,category_id,subcategory_id) VALUES ('".$row["product_id"]."','".$row["product_name"]."','".$row["category_id"]."','".$row["subcategory_id"]."')";
+           foreach($array as $row){
+               $sql = " INSERT INTO product(product_id,product_name,category_id,subcategory_id) VALUES ('".$row["product_id"]."','".$row["product_name"]."','".$row["category_id"]."','".$row["subcategory_id"]."')";
 
-    mysqli_query($connect, $sql);
+           mysqli_query($connect, $sql);
 
+    }       
   }
+}
+
+	
 echo "Επιτυχημένο ανέβασμα αρχείου!";
-	}
+	
 ?>
