@@ -8,7 +8,7 @@
 <html>
 <head>
 	<title>Εγγραφή</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="main_style.css">
 </head>
 <body>
      
