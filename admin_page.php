@@ -24,7 +24,7 @@ if (isset($_SESSION['email'])) {
    <title>Σελίδα Admin</title>
 
    <!-- custom css file link  -->
-   <link rel="stylesheet" href="sterg.css">
+   <link rel="stylesheet" href="admin_page.css">
 
 </head>
 <body>
