@@ -41,9 +41,13 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 				$_SESSION['email'] = $row['email'];
 				$_SESSION['registration_date'] = $row['registration_date'];
 				$_SESSION['admin'] = $row['admin'];
-				
+		if ($row['admin'] === 1){
+			//admin_menu exit
+					 ;}
+		else{
             	header("Location: home.php");
 		        exit();
+		}
             }else{
 				header("Location: index.php?error=Λάθος όνομα χρήστη ή κωδικός");
 		        exit();
