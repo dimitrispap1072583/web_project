@@ -36,23 +36,29 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		                                                                            {
 			$row = mysqli_fetch_assoc($result);
 												    
-            if ($row['email'] === $email && $row['password'] === $pass)  {
-            	
-            	$_SESSION['username'] = $row['username'];
+            if ($row['email'] === $email && $row['password'] === $pass )  {
+            	if ($row['admin'] === 1){
+		$_SESSION['username'] = $row['username'];
             	$_SESSION['user_id'] = $row['user_id'];
 		$_SESSION['email'] = $row['email'];
 		$_SESSION['registration_date'] = $row['registration_date'];
 		$_SESSION['admin'] = $row['admin'];
-
-
-		    
-		if ($row['admin'] === 1){
-			//admin_menu exit
-					 ;}
+			header("Location: admin_page.php");
+			exit();}
+			
 		                  else{
-            	                         header("Location: home.php");
+		 $_SESSION['username'] = $row['username'];
+            	$_SESSION['user_id'] = $row['user_id'];
+		$_SESSION['email'] = $row['email'];
+		$_SESSION['registration_date'] = $row['registration_date'];
+		$_SESSION['admin'] = $row['admin'];
+            	                         header("Location: testmap.php");
 		                         exit();
 		                      }
+            	
+
+		    
+		
                                                                              }
 	else{
 		header("Location: index.php?error=Λάθος όνομα χρήστη ή κωδικός");
