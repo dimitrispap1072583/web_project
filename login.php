@@ -1,7 +1,6 @@
 <?php 
 session_start(); 
-$_SESSION["user_id"] = $_GET['user_id'];
-$_SESSION["admin"] = $_GET['admin'];
+
 
 $connect = mysqli_connect("localhost:3307", "root", "", "web_project");
 
@@ -32,7 +31,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 		$result = mysqli_query($connect, $sql);
 
-		if (mysqli_num_rows($result) === 1) 
+		if (mysqli_num_rows($result) === 1) {
 		                                                                            {
 			$row = mysqli_fetch_assoc($result);
 												    
@@ -57,7 +56,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 		                      }
             	
 
-		    
+	    }
 		
                                                                              }
 	else{
