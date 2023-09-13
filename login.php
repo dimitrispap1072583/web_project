@@ -23,7 +23,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 	}else if(empty($pass)){
         header("Location: index.php?error=Απαιτείται κωδικός");
 	    exit();
-	}else{
+	}else                                                                                         {
 		// hashing the password
         $pass = md5($pass);
 
@@ -32,33 +32,38 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
 		$result = mysqli_query($connect, $sql);
 
-		if (mysqli_num_rows($result) === 1) {
+		if (mysqli_num_rows($result) === 1) 
+		                                                                            {
 			$row = mysqli_fetch_assoc($result);
-            if ($row['email'] === $email && $row['password'] === $pass) {
-            	//$_SESSION['user_name'] = $row['user_name'];
+												    
+            if ($row['email'] === $email && $row['password'] === $pass)  {
+            	
             	$_SESSION['username'] = $row['username'];
             	$_SESSION['user_id'] = $row['user_id'];
-				$_SESSION['email'] = $row['email'];
-				$_SESSION['registration_date'] = $row['registration_date'];
-				$_SESSION['admin'] = $row['admin'];
+		$_SESSION['email'] = $row['email'];
+		$_SESSION['registration_date'] = $row['registration_date'];
+		$_SESSION['admin'] = $row['admin'];
+
+
+		    
 		if ($row['admin'] === 1){
 			//admin_menu exit
 					 ;}
-		else{
-            	header("Location: home.php");
-		        exit();
-		}
-            }else{
-				header("Location: index.php?error=Λάθος όνομα χρήστη ή κωδικός");
-		        exit();
-			}
-		}else{
-			header("Location: index.php?error=Λάθος όνομα ή κωδικός");
-	        exit();
-		}
-	}
+		                  else{
+            	                         header("Location: home.php");
+		                         exit();
+		                      }
+                                                                             }
+	else{
+		header("Location: index.php?error=Λάθος όνομα χρήστη ή κωδικός");
+		exit();
+	    }
+		                                                                       }
+		
+	                                                                                   }
 	
-}else{
+}
+else{
 	header("Location: index.php");
 	exit();
 }
