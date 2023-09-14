@@ -19,25 +19,28 @@ if(isset($_SESSION['user_id']) && isset($_SESSION['username'])) //Selida epexerg
     <html>
     <head>
         <title>Profile</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="profile_style.css">
     </head>
     <body>
         <h1>Hello, <?php echo $_SESSION['username']; ?> this is your profile page. </h1>
         <p>Here you can change your username, password and email.</p>
         
-        <ul> <!-- Lista poy emfanizei ola ta dedomena toy xrhsth -->
-            <li>Username: <?php echo $_SESSION['username']; ?> </li>
-            <li>Email: <?php echo $_SESSION['email']; ?></li>
-            <li>Tokens: <?php echo $row['tokens']; ?></li>
-            <li>All time score: <?php echo $row['score']; ?></li>
-            <li>Monthly score: <?php echo $row['monthly_score']; ?></li>
-            <li>Submitted sales history: <?php echo $sales_row['date']?></li>
-        </ul>
+        <div class="profile-info-container">
+           <h2>User Information</h2>
+           <ul>
+              <li>Username: <?php echo $_SESSION['username']; ?></li>
+              <li>Email: <?php echo $_SESSION['email']; ?></li>
+              <li>Tokens: <?php echo $row['token']; ?></li>
+              <li>All time score: <?php echo $row['score']; ?></li>
+              <li>Monthly score: <?php echo $row['score_history']; ?></li>
+              <li>Submitted offers history: <?php echo $offer_row['date']; ?></li>
+          </ul>
+        </div>
         <nav> <!-- Menu pou dinei sto xrhsth thn epilogh na allaxei username, password h email -->
             <a href="change-username.php">Change username</a>
             <a href="change-email.php">Change email</a>
             <a href="change-password.php">Change password</a>
-            <a href="home.php">Home</a>
+            <a href="testmap.php">Home</a>
         </nav>
     </body>
     </html>

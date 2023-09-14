@@ -1,5 +1,5 @@
 <?php
-          include "db_conn.php";
+          include "database_connection.php";
       // Select the number of registrations for each date
       $sql = "SELECT AVG(price),category_id,date FROM price GROUP BY date,category_id";
       $result = mysqli_query($conn, $sql);
@@ -26,7 +26,7 @@
 
         while($i < count($priceArray))
         {
-          $vrefarray[]=$priceArray[$i];
+          $katoikidiaarray[]=$priceArray[$i];
           $i=$i+5;
         }
         
@@ -34,7 +34,7 @@
 
         while($z < count($priceArray))
         {
-          $froarray[]=$priceArray[$z];
+          $vrefarray[]=$priceArray[$z];
           $z=$z+5;
         }
 
@@ -116,10 +116,10 @@
 <body>
 
 <div class=myDIV id="myDIV">
-  <button class="btn active" onclick="changeData(0)">Βρεφικά Είδη</button>
-  <button class="btn" onclick="changeData(1)">Προσωπική φροντίδα</button>
+  <button class="btn active" onclick="changeData(0)">Για κατοικίδια</button>
+  <button class="btn" onclick="changeData(1)">Βρεφικά είδη</button>
   <button class="btn" onclick="changeData(2)">Ποτά - Αναψυκτικά</button>
-  <button class="btn" onclick="changeData(3)">Καθαριστικά</button>
+  <button class="btn" onclick="changeData(3)">Καθαριότητα</button>
   <button class="btn" onclick="changeData(4)">Τρόφιμα</button>
 </div>
 <div class="chartCard">
@@ -139,8 +139,8 @@
 <script>
 
 var dateArrayJS = <?php echo json_encode($datesarray); ?>;
+var katoikidiaArrayJS = <?php echo json_encode($katoikidiaarray); ?>;
 var vrefArrayJS = <?php echo json_encode($vrefarray); ?>;
-var froArrayJS = <?php echo json_encode($froarray); ?>;
 var potaArrayJS = <?php echo json_encode($potarray); ?>;
 var kathArrayJS = <?php echo json_encode($katharray); ?>;
 var trofArrayJS = <?php echo json_encode($trofarray); ?>;
@@ -148,19 +148,19 @@ var trofArrayJS = <?php echo json_encode($trofarray); ?>;
 
 var dataObjects = [
   {
-    label: "Βρεφικά Είδη",
-    data: vrefArrayJS
+    label: "Για κατοικίδια",
+    data: katoikidiaArrayJS
   },
   {
-    label: "Προσωπική φροντίδα",
-    data: froArrayJS
+    label: "Βρεφικά Είδη",
+    data: vrefArrayJS
   },
   {
     label: "Ποτά - Αναψυκτικά",
     data: potaArrayJS
   },
   {
-    label: "Καθαριστικά",
+    label: "Καθαριότητα",
     data: kathArrayJS
   },
   {

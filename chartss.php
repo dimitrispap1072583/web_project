@@ -46,16 +46,16 @@
     <div class="chartCard">
       <div class="chartBox">
         <input type="date" onchange="startDateFilter(this)" 
-        value="2022-12-01" min="2022-12-01" max="2023-03-25">
-        <input type="date" onchange="endDateFilter(this)" 
-        value="2023-01-05" min="2022-12-01" max="2023-03-25">
+            value="2023-01-08" min="2023-01-08" max="2023-09-30">
+       <input type="date" onchange="endDateFilter(this)" 
+            value="2023-01-08" min="2023-01-08" max="2023-09-30">
         <canvas id="myChart"></canvas>
       </div>
     </div>
 
     <?php
        
-      include "db_conn.php";
+      include "database_connection.php";
 
        
       // Select the number of registrations for each date
@@ -111,8 +111,8 @@
       options: {
         scales: {
           x: { 
-            min: '2022-12-01',
-            max: '2023-03-25',
+            min: '2023-01-08',
+            max: '2023-30-09',
             type: 'time',
             time:{
                 unit: 'day'
