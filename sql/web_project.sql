@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1:3307
--- Χρόνος δημιουργίας: 12 Σεπ 2023 στις 22:59:31
+-- Χρόνος δημιουργίας: 14 Σεπ 2023 στις 16:55:44
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Βάση δεδομένων: `web_project`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `awards`
+--
+
+CREATE TABLE `awards` (
+  `awards_id` tinyint(4) NOT NULL DEFAULT 1,
+  `tokens` int(11) DEFAULT 0,
+  `made` tinyint(1) NOT NULL DEFAULT 0,
+  `given` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `awards`
+--
+
+INSERT INTO `awards` (`awards_id`, `tokens`, `made`, `given`) VALUES
+(0, 300, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -42,6 +62,34 @@ INSERT INTO `category` (`id`, `name`) VALUES
 ('8016e637b54241f8ad242ed1699bf2da', 'Βρεφικά Είδη'),
 ('d41744460283406a86f8e4bd5010a66d', 'Καθαριότητα'),
 ('662418cbd02e435280148dbb8892782a', 'Για κατοικίδια');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή πίνακα για τον πίνακα `offer`
+--
+
+CREATE TABLE `offer` (
+  `offer_id` int(11) NOT NULL,
+  `stock` enum('on stock','out of stock') NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `offer_price` float NOT NULL,
+  `shop_id` bigint(255) NOT NULL,
+  `offerdate` date NOT NULL DEFAULT current_timestamp(),
+  `like_amount` int(11) NOT NULL,
+  `dislike_amount` int(11) NOT NULL,
+  `user_id` int(25) NOT NULL,
+  `end` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Άδειασμα δεδομένων του πίνακα `offer`
+--
+
+INSERT INTO `offer` (`offer_id`, `stock`, `product_id`, `offer_price`, `shop_id`, `offerdate`, `like_amount`, `dislike_amount`, `user_id`, `end`) VALUES
+(0, '', 769, 1, 354449389, '2023-09-14', 10, 3, 3, 5),
+(1, '', 107, 1, 1643373636, '2023-09-14', 15, 6, 1, 5),
+(2, '', 1086, 1, 1657132006, '2023-09-14', 30, 10, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -504,7 +552,7 @@ CREATE TABLE `user` (
   `score` int(11) NOT NULL,
   `score_history` bigint(20) NOT NULL,
   `token_history` int(12) NOT NULL,
-  `admin` int(11) NOT NULL
+  `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -512,8 +560,31 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `registration_date`, `token`, `score`, `score_history`, `token_history`, `admin`) VALUES
-(0, 'Σταμάτης', '@Stam1809', 'stam@gmail.com', '0000-00-00 00:00:00', 0, 0, 0, 0, 1),
-(0, 'user1', '0f13dcb6729761548649efb47bb2908d', 'user1@gmail.com', '2023-09-10 20:02:43', 0, 0, 0, 0, 0);
+(1, 'user1', '73d1a770b8274d0942d6fc9673a17301', 'user1@gmail.com', '2023-09-13 17:21:20', 0, 0, 0, 0, 0),
+(2, 'user2', 'bbc983e63720d7e85c1eae0331d62f70', 'user2@gmail.com', '2023-09-13 17:21:48', 0, 0, 0, 0, 0),
+(3, 'user3', '25e1637a5b1b9ed810c5c149dd445574', 'user3@gmail.com', '2023-09-13 17:22:19', 0, 0, 0, 0, 0),
+(4, 'Dimitris', '@Dimitris123', 'dimitris@gmail.com', '2023-09-13 14:31:00', 0, 0, 0, 0, 1),
+(5, 'eri', '86b6a68519e19ba3758b65338d3b96cb', 'erintoulai@al.al', '2023-09-13 19:13:49', 0, 0, 0, 0, 0);
+
+--
+-- Ευρετήρια για άχρηστους πίνακες
+--
+
+--
+-- Ευρετήρια για πίνακα `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT για άχρηστους πίνακες
+--
+
+--
+-- AUTO_INCREMENT για πίνακα `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
