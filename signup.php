@@ -1,5 +1,43 @@
 <?php
-   $connect = mysqli_connect("localhost:3307", "root", "", "web_project");
+   include "database_connection.php";
+   $message = ''; 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $cpassword = ($_POST['cpassword']);
+
+    $upperCase = preg_match('/[A-Z]/', $password);
+    $number = preg_match('/\d/', $password);
+    $symbol = preg_match('/[!@#\$%^&*()_+\-=]/', $password);
+    $length = strlen($password) >= 8;
+
+    if (!$upperCase || !$number || !$symbol || !$length) {
+        $message = "Ο κωδικός δεν πληροί τα απαραίτητα κριτήρια.";
+    } else if($password !== $cpassword) {
+        $message="Δεν ταιριάζουν οι κωδικοί μεταξύ τους";
+	    exit();
+    }else{
+        $sql = "SELECT * FROM user WHERE email='$email'";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            $message="Το όνομα χρήστη χρησιμοποιείται, διάλεξε ένα άλλο";
+            exit();
+        } else {
+            $insert = "INSERT INTO user (email, password, username) VALUES ('$email', '$password', '$username')";
+            $result = mysqli_query($conn, $insert);
+
+            if ($result) {
+                header("Location: index.php?success=Επιτυχής εγγραφή.");
+                exit();
+            } else {
+                $message = "Η εγγραφή απέτυχε. Προσπαθείστε ξανά.";
+            }
+        }
+    }
+         
+}
 
 ?>
 
@@ -12,70 +50,47 @@
 </head>
 <body>
      
-     <form action="signup_complete.php" method="post">
+     <form action="signup.php" method="post">
      	<h2>Εγγραφή</h2>
-     	<?php if (isset($_GET['error'])) { ?>
-     		<p class="error"><?php echo $_GET['error']; ?></p>
-     	<?php } ?>
-
-          <?php if (isset($_GET['success'])) { ?>
-               <p class="success"><?php echo $_GET['success']; ?></p>
-          <?php } ?>
-
           <label>Όνομα Χρήστη</label>
-          <?php if (isset($_GET['username'])) { ?>
-               <input type="text" 
-                      name="username" 
-                      placeholder="Όνομα Χρήστη"
-                      value="<?php echo $_GET['username']; ?>"><br>
-          <?php }else{ ?>
-               <input type="text" 
-                      name="username" 
-                      placeholder="Όνομα Χρήστη"><br>
-          <?php }?>
-
-          <label>Email</label>
-          <?php if (isset($_GET['email'])) { ?>
-               <input type="text" 
-                      name="email" 
-                      placeholder="Email"
-                      value="<?php echo $_GET['email']; ?>"><br>
-          <?php }else{ ?>
-               <input type="text" 
-                      name="email" 
-                      placeholder="Email"><br>
-          <?php }?>
-
-
-     	<label>Κωδικός</label>
-     	<input type="password" 
-                 name="password" 
-                 id="password"
-                 placeholder="Κωδικός" onkeyup="return validate()"><br>
+        <input type="text" name="username" placeholder="Όνομα Χρήστη" required>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Email" required>
+        <label>Κωδικός</label>
+        <input type="password" id="password" name="password" placeholder="Κωδικός" onkeyup= "return validatepassword()" required><br>
+        <p id="passwordError" ></p>
 
           <label>Επαλήθευση Κωδικού</label>
-          <input type="password" 
-                 name="cpassword" 
-                 id="cpassword"
-                 placeholder="Επαλήθευση Κωδικού" onkeyup="return confirmm()"><br>
+          <input type="password" name="cpassword" id="cpassword"placeholder="Επαλήθευση Κωδικού"onkeyup="return confirmm()" required><br>
 
                 
                  
                  
                  <ul>
-                    <li id="upper">Τουλάχιστον ένα κεφαλαίο</li>
-                    <li id="special_character">Τουλάχιστον ένα ειδικό σύμβολο</li>
+                    <li id="upperCase">Τουλάχιστον ένα κεφαλαίο</li>
+                    <li id="symbol">Τουλάχιστον ένα ειδικό σύμβολο</li>
                     <li id="number">Τουλάχιστον έναν αριθμό</li>
                     <li id="length">Τουλάχιστον 8 χαρακτήρες</li>
                 </ul>
-                
-                
-     	<button type="submit">Εγγραφή</button>
+          <button type="submit">Εγγραφή</button>
          
           <a href="index.php" class="ca">Έχεις ήδη λογαριασμό;</a>
      
           </form>
-         <script src="passwordvalidate.js"></script>
+         <p class="signup-message" id="signupMessage"><?php echo $message; ?></p>
+                
+         <script src="passwordcheck.js"></script>
+         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("form").addEventListener("submit", function (e) {
+                if (!validatepassword()) {
+                    e.preventDefault(); 
+                }
+            });
+         });
+        </script>
+     	
+         
         
 </body>
 </html>
