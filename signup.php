@@ -15,22 +15,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!$upperCase || !$number || !$symbol || !$length) {
         $message = "Ο κωδικός δεν πληροί τα απαραίτητα κριτήρια.";
     } else if($password !== $cpassword) {
-        $message="Δεν ταιριάζουν οι κωδικοί μεταξύ τους";
-	    exit();
+        header("Location: signup.php?error");
+        if(isset($_GET['error'])){
+           $message = "Δεν ταιριάζουν οι κωδικοί μεταξύ τους";
+           echo $message;
+	   exit();
+        }
     }else{
-        $sql = "SELECT * FROM user WHERE email='$email'";
+        $sql = "SELECT * FROM user WHERE username = '$username'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
-            $message="Το όνομα χρήστη χρησιμοποιείται, διάλεξε ένα άλλο";
-            exit();
+            header("Location: signup.php?error");
+            if(isset($_GET['error'])){
+                  $message = "Το όνομα χρήστη χρησιμοποιείται, δοκίμασε ένα άλλο.";
+                  echo $message;
+	          exit();
+            }
         } else {
             $insert = "INSERT INTO user (email, password, username) VALUES ('$email', '$password', '$username')";
-            $result = mysqli_query($conn, $insert);
+            $result2 = mysqli_query($conn, $insert);
 
-            if ($result) {
-                header("Location: index.php?success=Επιτυχής εγγραφή.");
-                exit();
+            if ($result2) {
+                header("Location: index.php?success");
+                if(isset($_GET['success'])){
+                    $message = "Επιτυχής εγγραφή.";
+                    echo $message;
+	            exit();
+                }
             } else {
                 $message = "Η εγγραφή απέτυχε. Προσπαθείστε ξανά.";
             }
@@ -80,17 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <p class="signup-message" id="signupMessage"><?php echo $message; ?></p>
                 
          <script src="passwordcheck.js"></script>
-         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector("form").addEventListener("submit", function (e) {
-                if (!validatepassword()) {
-                    e.preventDefault(); 
-                }
-            });
-         });
-        </script>
      	
-         
         
 </body>
 </html>

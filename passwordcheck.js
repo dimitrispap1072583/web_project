@@ -7,11 +7,14 @@ function validatepassword() {
     var num = document.getElementById("number");
     var len = document.getElementById("length");
     
+    
+ 
     if(passwordInput.value.match(/[A-Z]/)){
         upper.style.color = "green"
     }
     else{
         upper.style.color = "red"
+       
     }
 
     if(passwordInput.value.match(/[!\@\#\$\%\^\&\*\(\)\_\-\+\=\?\>\<\.\,]/)){
@@ -19,6 +22,7 @@ function validatepassword() {
     }
     else{
         symbol.style.color= "red"
+        
     }
 
     if(passwordInput.value.match(/[0-9]/)){
@@ -26,22 +30,20 @@ function validatepassword() {
     }
     else{
         num.style.color = "red"
+        
     }
 
     if(passwordInput.value.length < 8){
         len.style.color = "red"
+         
     }
     else{
         len.style.color = "green"
+         
     }
+    
 
 }
-
-document.querySelector("form").addEventListener("submit", function (e) {
-    if (!validatepassword()) {
-        e.preventDefault(); 
-    }
-});
 
 function confirmm(){
 
@@ -60,3 +62,4 @@ function confirmm(){
         document.getElementById("upperCase").style.display = "block";
     }
 }
+
