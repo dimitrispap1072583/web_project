@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db_conn.php";
+include "database_connection.php";
 
 if(isset($_SESSION['user_id']) && isset($_SESSION['username']))
 {
@@ -18,27 +18,27 @@ if(isset($_SESSION['user_id']) && isset($_SESSION['username']))
 
         if(empty($newname)) //Elegxos an exei dwthei to neo username
         {
-            header("Location: change-username.php?error=A new username is required.");
+            header("Location: change-username.php?error=Παρακαλώ πληκτρολογείστε το νέο όνομα χρήστη.");
             exit();
         }
         else
         {
-            $id = $_SESSION['id']; //An exei dwthei tote arxikopoihse metavlhtes me ta yparxwn id, username kai epelexe toys xrhstes apo th vash me ayto to id kai username
-            $uname = $_SESSION['user_name'];
-            $sql = "SELECT user_name FROM users WHERE id='$id' AND user_name='$uname'";
+            $id = $_SESSION['user_id']; //An exei dwthei tote arxikopoihse metavlhtes me ta yparxwn id, username kai epelexe toys xrhstes apo th vash me ayto to id kai username
+            $uname = $_SESSION['username'];
+            $sql = "SELECT username FROM user WHERE user_id='$id' AND username='$uname'";
             $result = mysqli_query($conn,$sql);
             
-            if(mysqli_num_rows($result) === 1) //An vrethei o xrhsths tote ananewse to username sto neo kai emfanise mhnyma epityxias
+            if(mysqli_num_rows($result) === 1) 
             {
-                $sqlchange = "UPDATE users SET user_name='$newname' WHERE id='$id'";
+                $sqlchange = "UPDATE user SET username='$newname' WHERE user_id='$id'";
                 mysqli_query($conn,$sqlchange);
-                $_SESSION['user_name']=$newname;
-                header("Location: change-username.php?success=Username change was succesful");
+                $_SESSION['username']=$newname;
+                header("Location: change-username.php?success=Η αλλαγή ονόματος χρήστη ήταν επιτυχημένη.");
                 exit();
             }
             else
             {
-                header("Location: change-username.php?error=User not found");
+                header("Location: change-username.php?error=Δεν βρέθηκε χρήστης με αυτό το όνομα χρήστη.");
                 exit();
             }
         }

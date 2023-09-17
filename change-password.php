@@ -1,15 +1,15 @@
-<?php //Arxeio poy emfanizei ta aparaithta gia thn allagh password
+<?php 
 session_start();
-include "db_conn.php";
+include "database_connection.php";
 
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
+if(isset($_SESSION['user_id']) && isset($_SESSION['username']))
 {
     ?>
 <!DOCTYPE html>
     <html>
     <head>
-        <title>Change username</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Αλλαγή κωδικού πρόσβασης</title>
+        <link rel="stylesheet" type="text/css" href="main_style.css">
     </head>
     <body>
         <form action="change-p.php" method="post">
@@ -22,17 +22,17 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
                 <p class="success"> <?php echo $_GET['success']; ?></p>
             <?php } ?>
 
-            <label> Old password </label>
-            <input type="password" name="oldpassword" placeholder="Old Password"><br>
+            <label> Παλιός κωδικός </label>
+            <input type="password" name="oldpassword" placeholder="Παλιός Κωδικός"><br>
 
-            <label> New Password </label>
-            <input type="password" name="newpassword" placeholder="New Password"><br>
+            <label> Νέος κωδικός </label>
+            <input type="password" name="newpassword" placeholder="Νέος Κωδικός"><br>
 
-            <label> Confirm New Password </label>
-            <input type="password" name="conpassword" placeholder="Confirm New Password"><br>
+            <label> Επανάληψη νέου κωδικού </label>
+            <input type="password" name="conpassword" placeholder="Επιβεβαίωση νέου κωδικού"><br>
 
-            <button class="button" type="submit">Confirm change</button>
-                <a href="testmap.php">HOME</a>
+            <button class="button" type="submit">Επιβεβαίωση αλλαγής.</button>
+                <a href="testmap.php">Αρχικό μενού</a>
         </form>
     </body>
     </html>

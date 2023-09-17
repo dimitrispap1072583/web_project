@@ -1,15 +1,15 @@
-<?php //Arxeio poy emfanizei ta aparaithta gia thn allagh username
+<?php
 session_start();
-include "db_conn.php";
+include "database_connection.php";
 
-if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
+if(isset($_SESSION['user_id']) && isset($_SESSION['username']))
 {
     ?>
 <!DOCTYPE html>
     <html>
     <head>
-        <title>Change username</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Αλλαγή ονόματος χρήστη.</title>
+        <link rel="stylesheet" type="text/css" href="main_style.css">
     </head>
     <body>
         <form action="change-u.php" method="post">
@@ -22,11 +22,11 @@ if(isset($_SESSION['user_id']) && isset($_SESSION['user_name']))
                 <p class="success"> <?php echo $_GET['success']; ?></p>
             <?php } ?>
 
-            <label> New Username</label>
-            <input type="text" name="newusername" placeholder="New Username"><br>
+            <label>Εισαγωγή νέου ονόματος χρήστη</label>
+            <input type="text" name="newusername" placeholder="Καινούριο όνομα χρήστη..."><br>
 
-            <button class="button" type="submit">Confirm change</button>
-                <a href="testmap.php">HOME</a>
+            <button class="button" type="submit">Επιβεβαίωση</button>
+                <a href="testmap.php">Αρχικό μενού</a>
         </form>
     </body>
     </html>

@@ -1,15 +1,15 @@
-<?php //Arxeio poy emfanizei ta aparaithta gia thn allagh email
+<?php 
 session_start();
-include "db_conn.php";
+include "database_connection.php";
 
-if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
+if(isset($_SESSION['user_id']) && isset($_SESSION['username']))
 {
     ?>
 <!DOCTYPE html>
     <html>
     <head>
-        <title>Change email</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Αλλαγή email</title>
+        <link rel="stylesheet" type="text/css" href="main_style.css">
     </head>
     <body>
         <form action="change-e.php" method="post">
@@ -23,10 +23,10 @@ if(isset($_SESSION['id']) && isset($_SESSION['user_name']))
             <?php } ?>
 
             <label> New Email</label>
-            <input type="text" name="newemail" placeholder="New Email"><br>
+            <input type="text" name="newemail" placeholder="Νέο Email"><br>
 
-            <button class="button" type="submit">Confirm change</button>
-                <a href="testmap.php">HOME</a>
+            <button class="button" type="submit">Επιβεβαίωση αλλαγής.</button>
+                <a href="testmap.php">Αρχικό μενού</a>
         </form>
     </body>
     </html>
