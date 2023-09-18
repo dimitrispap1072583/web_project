@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Εξυπηρετητής: 127.0.0.1:3307
--- Χρόνος δημιουργίας: 14 Σεπ 2023 στις 16:55:44
+-- Χρόνος δημιουργίας: 18 Σεπ 2023 στις 23:56:07
 -- Έκδοση διακομιστή: 10.4.28-MariaDB
 -- Έκδοση PHP: 8.2.4
 
@@ -39,7 +39,7 @@ CREATE TABLE `awards` (
 --
 
 INSERT INTO `awards` (`awards_id`, `tokens`, `made`, `given`) VALUES
-(0, 300, 0, 1);
+(1, 1200, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -550,7 +550,7 @@ CREATE TABLE `user` (
   `registration_date` datetime NOT NULL DEFAULT current_timestamp(),
   `token` int(11) NOT NULL,
   `score` int(11) NOT NULL,
-  `score_history` bigint(20) NOT NULL,
+  `score_history` int(11) NOT NULL,
   `token_history` int(12) NOT NULL,
   `admin` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -560,11 +560,19 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `email`, `registration_date`, `token`, `score`, `score_history`, `token_history`, `admin`) VALUES
-(1, 'user1', '73d1a770b8274d0942d6fc9673a17301', 'user1@gmail.com', '2023-09-13 17:21:20', 0, 0, 0, 0, 0),
-(2, 'user2', 'bbc983e63720d7e85c1eae0331d62f70', 'user2@gmail.com', '2023-09-13 17:21:48', 0, 0, 0, 0, 0),
-(3, 'user3', '25e1637a5b1b9ed810c5c149dd445574', 'user3@gmail.com', '2023-09-13 17:22:19', 0, 0, 0, 0, 0),
+(1, 'user1', '73d1a770b8274d0942d6fc9673a17301', 'user1@gmail.com', '2023-09-13 17:21:20', 32, 0, 0, 32, 0),
+(2, 'user2', 'bbc983e63720d7e85c1eae0331d62f70', 'user2@gmail.com', '2023-09-13 17:21:48', 32, 0, 0, 32, 0),
+(3, 'user3', '25e1637a5b1b9ed810c5c149dd445574', 'user3@gmail.com', '2023-09-13 17:22:19', 32, 0, 0, 32, 0),
 (4, 'Dimitris', '@Dimitris123', 'dimitris@gmail.com', '2023-09-13 14:31:00', 0, 0, 0, 0, 1),
-(5, 'eri', '86b6a68519e19ba3758b65338d3b96cb', 'erintoulai@al.al', '2023-09-13 19:13:49', 0, 0, 0, 0, 0);
+(5, 'eri', '86b6a68519e19ba3758b65338d3b96cb', 'erintoulai@al.al', '2023-09-13 19:13:49', 32, 0, 0, 32, 0),
+(6, 'user5', '7b5417a37129701a0f5954e0f346ebb8', 'user5@gmail.com', '2023-09-14 18:33:06', 32, 0, 0, 32, 0),
+(7, 'Lolos', '@Lolos123', 'lolos@gmail.com', '2023-09-14 18:41:37', 32, 0, 0, 32, 0),
+(32, 'xaralampos', '@Xara123', 'xara@gmail.com', '2023-09-16 00:50:45', 32, 0, 0, 32, 0),
+(34, 'orestis', '@Orestis18', 'orestis@gmail.com', '2023-09-17 21:44:46', 32, 0, 0, 32, 0),
+(37, 'Giannhs', '@Giannhs123', 'giannhs@gmail,com', '2023-09-18 21:40:59', 32, 0, 50, 32, 0),
+(38, 'Nikos', '@Nikos123', 'nikos@gmail,com', '2023-09-18 21:40:59', 224, 0, 170, 224, 0),
+(39, 'Kwstas', '@Kwstas123', 'kwstas@gmail,com', '2023-09-18 21:40:59', 128, 0, 100, 128, 0),
+(40, 'Alex', '@Alex123', 'alex@gmail,com', '2023-09-18 21:40:59', 320, 0, 200, 320, 0);
 
 --
 -- Ευρετήρια για άχρηστους πίνακες
@@ -584,7 +592,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT για πίνακα `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
