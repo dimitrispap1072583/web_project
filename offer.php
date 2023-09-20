@@ -106,7 +106,7 @@ $curr_user = $_SESSION['user_id'];
 if(isset($_GET['input']))
 {
     $input = $_GET['input']; 
-    $sql = "SELECT products.product_name, offer.product_id, offer.offer_price, offer.offerdate, offer.offer_id, offer.like_amount, offer.dislike_amount, offer.stock, offer.user_id FROM offer INNER JOIN product ON offer.product_id = product.product_id WHERE offer.shop_id = '$input' AND active = 1";
+    $sql = "SELECT product.product_name, offer.product_id, offer.offer_price, offer.offerdate, offer.offer_id, offer.like_amount, offer.dislike_amount, offer.stock, offer.user_id FROM offer INNER JOIN product ON offer.product_id = product.product_id WHERE offer.shop_id = '$input' ";
     $result = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($result) > 0) 
@@ -123,7 +123,7 @@ if(isset($_GET['input']))
             $dislikes = $row['dislike_amount'];
             $prod_id = $row['product_id'];
 
-            $sqluser = "SELECT username, score FROM user WHERE id='$user'"; 
+            $sqluser = "SELECT username, score FROM user WHERE user_id='$user'"; 
             $res = mysqli_query($conn, $sqluser);
             $r = mysqli_fetch_assoc($res);
             $username = $r['username'];

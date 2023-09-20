@@ -131,17 +131,15 @@ while($row = mysqli_fetch_array($result))
 
         if(isset($shop) && isset($price) && isset($product) && isset($stock)) 
         {
-            $sql_weekly = "SELECT * FROM price WHERE product_id='$product' AND date BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) AND DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY)";
+            $sql_weekly = "SELECT AVG(price) FROM price WHERE product_id='$product' AND date BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) AND DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY)";
             $sql_daily = "SELECT * FROM price WHERE product_id='$product' AND date = DATE_SUB(CURRENT_DATE, INTERVAL 1 DAY)";
 
             $result_weekly = mysqli_query($conn,$sql_weekly);
 
             if(mysqli_num_rows($result_weekly) > 0)
             {
-                while($row_week = mysqli_fetch_array($result_weekly))
-                {
-                    $week_price = $row_week['price'];
-                }
+               $week_price = $result_weekly;
+
             }else
             {
                 $week_price = 0;
