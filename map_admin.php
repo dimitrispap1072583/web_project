@@ -283,7 +283,7 @@ if (mysqli_num_rows($result) > 0) {
 
  <script>
         document.getElementById("profileButton").addEventListener("click", function() {
-            window.location.href = "prof-edit.php";
+            window.location.href = "admin_page.php";
         });
     </script>
 

@@ -47,6 +47,7 @@ if (isset($_SESSION['email'])) {
       <a href="chartss.php" class="btn">Γράφημα προσφορών</a>
       <a href="chartb.php" class="btn">Γράφημα μέσης τιμής</a>
       <a href="scoreboards.php" class="btn">Έλεγχος scoreboard</a>
+      <a href="map_admin.php" class="btn">Χάρτης</a>
    </div>
 
 </div>
